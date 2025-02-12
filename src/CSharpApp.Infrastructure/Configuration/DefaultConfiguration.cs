@@ -1,5 +1,8 @@
+using CSharpApp.Application.Behaviours;
 using CSharpApp.Core.Settings.HttpClient;
 using CSharpApp.Core.Settings.RestApi;
+using FluentValidation;
+using System.Reflection;
 
 namespace CSharpApp.Infrastructure.Configuration;
 
@@ -9,6 +12,17 @@ public static class DefaultConfiguration
     {
         services.ConfigureOptions<HttpClientSettingsSetup>();
         services.ConfigureOptions<RestApiSettingsSetup>();
+
+        Assembly applicationAssembly = Assembly.Load("CSharpApp.Application");
+        services.AddValidatorsFromAssembly(applicationAssembly);
+
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(applicationAssembly);
+
+            config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+        });
+
 
         services.AddSingleton<IProductsService, ProductsService>();
 
