@@ -24,6 +24,17 @@ public static class DefaultConfiguration
             config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
         });
 
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(
+                policy =>
+                {
+                    policy
+                        .WithOrigins("*")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+        });
 
         services.AddSingleton<IProductsService, ProductsService>();
         services.AddSingleton<ICategoriesService, CategoriesService>();
