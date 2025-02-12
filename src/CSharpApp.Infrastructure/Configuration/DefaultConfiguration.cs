@@ -1,4 +1,5 @@
 using CSharpApp.Application.Behaviours;
+using CSharpApp.Application.Categories;
 using CSharpApp.Core.Settings.HttpClient;
 using CSharpApp.Core.Settings.RestApi;
 using FluentValidation;
@@ -25,6 +26,7 @@ public static class DefaultConfiguration
 
 
         services.AddSingleton<IProductsService, ProductsService>();
+        services.AddSingleton<ICategoriesService, CategoriesService>();
 
         return services;
     }
