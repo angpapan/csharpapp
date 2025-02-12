@@ -35,7 +35,7 @@ public static class ProductsEndpoints
 
         app.MapPost("api/v{version:apiVersion}/products", async (
             ISender sender,
-            CreateProduct request,
+            [FromBody] CreateProduct request,
             CancellationToken cancellationToken = default
             ) =>
         {
