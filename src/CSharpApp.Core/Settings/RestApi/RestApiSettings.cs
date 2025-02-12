@@ -1,4 +1,4 @@
-namespace CSharpApp.Core.Settings;
+namespace CSharpApp.Core.Settings.RestApi;
 
 public sealed class RestApiSettings
 {
