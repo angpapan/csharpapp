@@ -8,14 +8,17 @@ public static class HttpConfiguration
 {
     public static IServiceCollection AddHttpConfiguration(this IServiceCollection services)
     {
-        var httpSettings = services.BuildServiceProvider().GetRequiredService<IOptions<HttpClientSettings>>().Value;
+        var httpSettings = services.BuildServiceProvider().GetRequiredService<IOptions<HttpClientSettings>>();
 
-        services.AddHttpClient(httpSettings.Name, (serviceProvider, client) =>
-        {
-            var settings = serviceProvider.GetRequiredService<IOptions<RestApiSettings>>().Value;
+        services.AddHttpClient(httpSettings.Value.Name, (serviceProvider, client) =>
+            {
+                var settings = serviceProvider.GetRequiredService<IOptions<RestApiSettings>>().Value;
 
-            client.BaseAddress = new Uri(settings.BaseUrl);
-        });
+                client.BaseAddress = new Uri(settings.BaseUrl);
+            })
+            .AddPolicyHandler(HttpClientPolicies.RetryPolicy(httpSettings))
+            .SetHandlerLifetime(TimeSpan.FromMinutes(httpSettings.Value.LifeTime));
+
 
         return services;
     }
