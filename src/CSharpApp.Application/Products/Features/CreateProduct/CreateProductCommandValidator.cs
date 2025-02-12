@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using CSharpApp.Application.Extensions;
+using FluentValidation;
 
 namespace CSharpApp.Application.Products.Features.CreateProduct;
 
@@ -34,14 +35,7 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
             .WithMessage("Images cannot be empty")
             .NotEmpty()
             .WithMessage("The images must contain at least one element.")
-            .Must(urls => urls.All(IsValidUrl))
+            .Must(urls => urls.All(url => url.IsValidUrl()))
             .WithMessage("Images should only contain url addresses.");
-    }
-
-    private bool IsValidUrl(string url)
-    {
-        return Uri.TryCreate(url, UriKind.Absolute, out _)
-               && (url.StartsWith("http://")
-               || url.StartsWith("https://"));
     }
 }

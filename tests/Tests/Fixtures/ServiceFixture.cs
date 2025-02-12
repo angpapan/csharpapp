@@ -16,7 +16,12 @@ public class ServiceFixture : IDisposable
     {
         HttpMessageHandlerMock = new Mock<HttpMessageHandler>();
         HttpClient = new HttpClient(HttpMessageHandlerMock.Object);
-        RestApiSettings = Options.Create(new RestApiSettings { Products = "https://api.example.com/products" });
+        RestApiSettings = Options.Create(new RestApiSettings
+        {
+            Products = "https://api.example.com/products",
+            Categories = "https://api.example.com/categories",
+            Auth = "https://api.example.com/auth/login"
+        });
         HttpClientSettings = Options.Create(new HttpClientSettings { Name = "TestClient" });
     }
 
