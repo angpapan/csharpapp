@@ -1,3 +1,4 @@
+using CSharpApp.Application.Extensions;
 using CSharpApp.Core.Dtos.Products;
 using CSharpApp.Core.Settings.HttpClient;
 using CSharpApp.Core.Settings.RestApi;
@@ -25,9 +26,7 @@ public class ProductsService : IProductsService
         JsonContent bodyContent = JsonContent.Create(product);
 
         var response = await _httpClient.PostAsync(_restApiSettings.Products, bodyContent, cancellationToken);
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
-        var res = JsonSerializer.Deserialize<Product>(content);
+        var res = await response.ConvertToOrThrow<Product>(cancellationToken);
 
         return res;
     }
@@ -35,9 +34,7 @@ public class ProductsService : IProductsService
     public async Task<Product> GetProductById(int id, CancellationToken cancellationToken = default)
     {
         var response = await _httpClient.GetAsync($"{_restApiSettings.Products}/{id}", cancellationToken);
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
-        var res = JsonSerializer.Deserialize<Product>(content);
+        var res = await response.ConvertToOrThrow<Product>(cancellationToken);
 
         return res;
     }
@@ -45,9 +42,7 @@ public class ProductsService : IProductsService
     public async Task<IReadOnlyCollection<Product>> GetProducts(CancellationToken cancellationToken = default)
     {
         var response = await _httpClient.GetAsync(_restApiSettings.Products, cancellationToken);
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
-        var res = JsonSerializer.Deserialize<List<Product>>(content);
+        var res = await response.ConvertToOrThrow<List<Product>>(cancellationToken);
 
         return res.AsReadOnly();
     }
