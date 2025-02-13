@@ -1,3 +1,21 @@
+# Run with Docker
+
+**1.** Execute `docker build -t csharpapp-api .` inside the solution directory.
+
+**2.** Execute `docker run -d -p 8080:8080 --name csharpapp-container csharpapp-api` inside the solution directory.
+
+**3.** The application is available on http://localhost:8080/
+
+# Notes
+
+**1.** For easier testing, you can use the provided Postman collection (postman_csharpapp_api.json)
+
+---
+
+---
+
+---
+
 # C# Accepted Assessment app
 
 An application for C# (.net) knowledge assessment
@@ -36,8 +54,8 @@ We must measure and log the performance of the requests. Create a middleware to 
 
 ## Implementation
 
-* Try to understand and keep the architectural approach.
-* Add unit testing.
-* Add docker support.
-* Using CQRS pattern will be considered as a strong plus.
-* The attached collections (postman/insomnia) will help you with the requests.
+- Try to understand and keep the architectural approach.
+- Add unit testing.
+- Add docker support.
+- Using CQRS pattern will be considered as a strong plus.
+- The attached collections (postman/insomnia) will help you with the requests.
