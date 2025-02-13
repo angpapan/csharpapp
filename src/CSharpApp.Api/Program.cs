@@ -24,6 +24,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseMiddleware<PerformanceMonitorMiddleware>();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors();
 //app.UseHttpsRedirection();
