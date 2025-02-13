@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 var logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
 builder.Logging.ClearProviders().AddSerilog(logger);
 
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -24,6 +27,8 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors();
 //app.UseHttpsRedirection();
+
+app.UseSerilogRequestLogging();
 
 var versionedEndpointRouteBuilder = app.NewVersionedApi();
 
