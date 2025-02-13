@@ -6,6 +6,11 @@ namespace CSharpApp.Application.Extensions
     {
         private static string CleanMessage(string input)
         {
+            if (input is null)
+            {
+                return string.Empty;
+            }
+
             string result = input.Replace("\"", "");
             result = result.Replace("\n", " ");
             result = Regex.Replace(result, @"\s+", " ");
