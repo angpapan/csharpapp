@@ -1,3 +1,4 @@
+using CSharpApp.Application.Auth;
 using CSharpApp.Application.Behaviours;
 using CSharpApp.Application.Categories;
 using CSharpApp.Core.Settings.HttpClient;
@@ -36,8 +37,10 @@ public static class DefaultConfiguration
                 });
         });
 
+        services.AddMemoryCache();
         services.AddSingleton<IProductsService, ProductsService>();
         services.AddSingleton<ICategoriesService, CategoriesService>();
+        services.AddSingleton<IAuthService, AuthService>();
 
         return services;
     }
