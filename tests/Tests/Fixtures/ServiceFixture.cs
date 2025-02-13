@@ -20,9 +20,17 @@ public class ServiceFixture : IDisposable
         {
             Products = "https://api.example.com/products",
             Categories = "https://api.example.com/categories",
-            Auth = "https://api.example.com/auth/login"
+            Auth = "https://api.example.com/auth/login",
+            Username = "john@mail.com",
+            Password = "changeme",
+            AuthTokenCacheId = "auth-token",
+            AuthTokenExpirationInMinutes = 5
         });
-        HttpClientSettings = Options.Create(new HttpClientSettings { Name = "TestClient" });
+
+        HttpClientSettings = Options.Create(new HttpClientSettings
+        {
+            Name = "TestClient"
+        });
     }
 
     public void Dispose()
