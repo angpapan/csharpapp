@@ -2,6 +2,7 @@ using CSharpApp.Application.Auth;
 using CSharpApp.Application.Behaviours;
 using CSharpApp.Application.Categories;
 using CSharpApp.Core.Settings.HttpClient;
+using CSharpApp.Core.Settings.PerformanceMonitoring;
 using CSharpApp.Core.Settings.RestApi;
 using FluentValidation;
 using System.Reflection;
@@ -14,6 +15,7 @@ public static class DefaultConfiguration
     {
         services.ConfigureOptions<HttpClientSettingsSetup>();
         services.ConfigureOptions<RestApiSettingsSetup>();
+        services.ConfigureOptions<PerformanceMonitoringSettingsSetup>();
 
         Assembly applicationAssembly = Assembly.Load("CSharpApp.Application");
         services.AddValidatorsFromAssembly(applicationAssembly);
