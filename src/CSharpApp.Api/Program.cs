@@ -29,5 +29,6 @@ var versionedEndpointRouteBuilder = app.NewVersionedApi();
 
 versionedEndpointRouteBuilder.MapProductsEndpoints();
 versionedEndpointRouteBuilder.MapCategoriesEndpoints();
+versionedEndpointRouteBuilder.MapAuthEndpoints();
 
 app.Run();
