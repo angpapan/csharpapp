@@ -21,6 +21,7 @@ public class ServiceFixture : IDisposable
             Products = "https://api.example.com/products",
             Categories = "https://api.example.com/categories",
             Auth = "https://api.example.com/auth/login",
+            Profile = "https://api.example.com/auth/profile",
             Username = "john@mail.com",
             Password = "changeme",
             AuthTokenCacheId = "auth-token",
