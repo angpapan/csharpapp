@@ -9,13 +9,15 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
     {
         RuleFor(p => p.Title)
             .NotEmpty()
+            .WithMessage("Title cannot be empty")
             .NotNull()
-            .Configure(rule => rule.MessageBuilder = _ => "Title cannot be empty");
+            .WithMessage("Title cannot be null");
 
         RuleFor(p => p.Description)
             .NotEmpty()
+            .WithMessage("Description cannot be empty")
             .NotNull()
-            .Configure(rule => rule.MessageBuilder = _ => "Description cannot be empty");
+            .WithMessage("Description cannot be null");
 
         RuleFor(p => p.Price)
             .NotEmpty()
@@ -27,8 +29,9 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 
         RuleFor(p => p.CategoryId)
             .NotEmpty()
+            .WithMessage("CategoryId cannot be empty")
             .NotNull()
-            .Configure(rule => rule.MessageBuilder = _ => "CategoryId cannot be empty");
+            .WithMessage("CategoryId cannot be null");
 
         RuleFor(x => x.Images)
             .NotNull()
