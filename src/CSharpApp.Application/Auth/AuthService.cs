@@ -49,7 +49,7 @@ public class AuthService : IAuthService
         }
 
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        var response = await _httpClient.GetAsync($"{_restApiSettings.Auth}/profile", cancellationToken);
+        var response = await _httpClient.GetAsync(_restApiSettings.Profile, cancellationToken);
         var res = await response.ConvertToOrThrow<Profile>(cancellationToken);
 
         return res;
